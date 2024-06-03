@@ -7,7 +7,7 @@ interface BreadCrumbProps {
     pageTitle : string;
 }
 
-const BreadCrumb = ({ title, pageTitle } : BreadCrumbProps) => {
+const   BreadCrumb = ({ title, pageTitle } : BreadCrumbProps) => {
     return (
         <React.Fragment>
             <Row>

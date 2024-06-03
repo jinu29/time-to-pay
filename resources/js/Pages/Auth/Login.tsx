@@ -8,8 +8,8 @@ export default function Login({ status, canResetPassword }: any) {
 
     const [passwordShow, setPasswordShow] = useState<boolean>(false);
     const { data, setData, post, processing, errors, reset } = useForm({
-        email: 'admin@themesbrand.com' || '',
-        password: '12345678' || '',
+        email: '',
+        password: '',
         remember: false,
     });
 
@@ -28,7 +28,7 @@ export default function Login({ status, canResetPassword }: any) {
     return (
         <React.Fragment>
             <GuestLayout>
-                <Head title="Basic SignIn | Velzon - React Admin & Dashboard Template" />
+                <Head title="SignIn | TimeToPay" />
                 <div className="auth-page-content mt-lg-5">
                     <Container>
                         <Row>
@@ -39,7 +39,7 @@ export default function Login({ status, canResetPassword }: any) {
                                             <img src={logoLight} alt="" height="20" />
                                         </Link>
                                     </div>
-                                    <p className="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
+                                    <p className="mt-3 fs-15 fw-medium">Time to Pay</p>
                                 </div>
                             </Col>
                         </Row>
@@ -50,7 +50,7 @@ export default function Login({ status, canResetPassword }: any) {
                                     <Card.Body className='p-4'>
                                         <div className="text-center mt-2">
                                             <h5 className="text-primary">Welcome Back !</h5>
-                                            <p className="text-muted">Sign in to continue to Velzon.</p>
+                                            <p className="text-muted">Sign in to continue to Time to Pay.</p>
                                         </div>
                                         {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
                                         <div className='p-2 mt-4'>

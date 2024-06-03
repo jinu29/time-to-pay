@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\VelzonRoutesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,6 +40,14 @@ Route::middleware('auth')->group(function () {
     Route::post("order-create", [OrderController::class, 'store'])->name('order-create');
     Route::post("order-update", [OrderController::class, 'update'])->name('order-update');
     Route::post("order-delete", [OrderController::class, 'destroy'])->name('order-delete');
+
+    //Admin
+
+    Route::controller(PagesController::class)->group(function () {
+        Route::get("/eko", "EKOConf");
+
+
+    });
 
 
     Route::controller(VelzonRoutesController::class)->group(function () {
@@ -225,5 +235,9 @@ Route::middleware('auth')->group(function () {
         Route::get("/pages-coming-soon", "pages_coming_soon");
     });
 });
+
+
+// Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
 
 require __DIR__ . '/auth.php';

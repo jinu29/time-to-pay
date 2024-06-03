@@ -10,6 +10,7 @@ import { createSelector } from 'reselect';
 import { Link } from '@inertiajs/react';
 
 const VerticalLayout = (props: any) => {
+
     const navData = navdata().props.children;
     const path = window.location.pathname;
 
@@ -143,6 +144,7 @@ const VerticalLayout = (props: any) => {
         });
     };
 
+    console.log("data", navData)
     return (
         <React.Fragment>
             {/* menu Items */}
