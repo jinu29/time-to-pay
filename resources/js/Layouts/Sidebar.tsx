@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import SimpleBar from "simplebar-react";
 //import logo
-import logoSm from "../../images/logo-sm.png";
-import logoDark from "../../images/logo-dark.png";
-import logoLight from "../../images/logo-light.png";
+import logoSm from "../../images/logotime.png";
+import logoDark from "../../images/logotime.png";
+import logoLight from "../../images/logotime.png";
 
 //Import Components
 import VerticalLayout from "./VerticalLayouts";
@@ -39,19 +39,26 @@ const Sidebar = ({ layoutType } : any) => {
         <div className="navbar-brand-box">
           <Link href="/" className="logo logo-dark">
             <span className="logo-sm">
-              <img src={logoSm} alt="" height="22" />
+              {/* <img src={logoSm} alt="" height="22" /> */}
+              <h4 style={{color:"white", marginTop:"20px"}}>T</h4>
             </span>
             <span className="logo-lg">
-              <img src={logoDark} alt="" height="17" />
+              {/* <img src={logoDark} alt="" height="17" /> */}
+              <h4 style={{color:"white", marginTop:"20px"}}>TimeToPay</h4>
+
             </span>
           </Link>
 
           <Link href="/" className="logo logo-light">
             <span className="logo-sm">
-              <img src={logoSm} alt="" height="22" />
+              {/* <img src={logoSm} alt="" height="22" /> */}
+              <h4 style={{color:"white", marginTop:"20px"}}>T</h4>
+
             </span>
             <span className="logo-lg">
-              <img src={logoLight} alt="" height="17" />
+              {/* <img src={logoLight} alt="" height="17" /> */}
+              <h4 style={{color:"white", marginTop:"20px"}}>TimeToPay</h4>
+
             </span>
           </Link>
           <button
