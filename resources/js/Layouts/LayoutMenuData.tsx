@@ -487,6 +487,20 @@ const Navdata = () => {
         },
 
         {
+            id: "user_management",
+            label: "User Management",
+            icon: "ri-account-circle-line",
+            link: "/user_management",
+            click: function (e : any) {
+                e.preventDefault();
+                setIsAuth(!isAuth);
+                setIscurrentState('Auth');
+                updateIconSidebar(e);
+            },
+            stateVariables: isAuth,
+        },
+
+        {
             label: "Settings and Conf",
             isHeader: true,
         },
@@ -496,6 +510,19 @@ const Navdata = () => {
             label: "EKO Conf",
             icon: "ri-account-circle-line",
             link: "/eko",
+            click: function (e : any) {
+                e.preventDefault();
+                setIsAuth(!isAuth);
+                setIscurrentState('Auth');
+                updateIconSidebar(e);
+            },
+            stateVariables: isAuth,
+        },
+        {
+            id: "otpconf",
+            label: "OTP conf",
+            icon: "ri-lock-password-line",
+            link: "/settings/otp_conf",
             click: function (e : any) {
                 e.preventDefault();
                 setIsAuth(!isAuth);

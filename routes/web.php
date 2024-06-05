@@ -7,6 +7,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\VelzonRoutesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -239,5 +240,16 @@ Route::middleware('auth')->group(function () {
 
 // Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
 Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
+Route::get('/settings/otp_conf', [SettingsController::class, 'ShowOTPconf'])->name('settings.ShowOTPconf');
+Route::post('/settings/update/otp_conf', [SettingsController::class, 'updateOTPConf'])->name('settings.updateOTPConf');
+
+require __DIR__ . '/auth.php';
+
+
+//User Management
+Route::get('/user_management', [UserManagementController::class, 'index'])->name('user.index');
+Route::post('/user_management', [UserManagementController::class, 'store']);
+Route::put('/user_management/{id}', [UserManagementController::class, 'update']);
+Route::delete('/user_management{id}', [UserManagementController::class, 'destroy']);
 
 require __DIR__ . '/auth.php';

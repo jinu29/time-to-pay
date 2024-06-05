@@ -1,0 +1,21 @@
+import React, { useState } from 'react';
+import { Head } from '@inertiajs/react';
+import Layout from '../../Layouts';
+
+export default function UserManagement() {
+
+  const [rightColumn, setRightColumn] = useState<boolean>(true);
+  const toggleRightColumn = () => {
+    setRightColumn(!rightColumn);
+  };
+
+  return (
+    <React.Fragment>
+      <Head title='User Management || Time To Pay' />
+      <div className="page-content">
+      
+      </div >
+    </React.Fragment >
+  );
+}
+UserManagement.layout = (page: any) => <Layout children={page} />;
