@@ -110,4 +110,86 @@ class SettingsController extends Controller
             ->route('settings.showOTPConf')
             ->with('success', 'Settings updated successfully.');
     }
+    
+    //Business Setting
+    public function BusinessSettingShow()
+    {
+        $settings = [
+            'platform_commission' => settings('platform_commission'),
+            'vendor_commission' => settings('vendor_commission'),
+        ];
+
+        return Inertia::render('BussinessSettings/BussinessSettings', ['settings' => $settings]);
+    }
+    public function BusinessSettingUpdate(Request $request): RedirectResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'platform_commission' => 'required|numeric|min:0',
+            'vendor_commission' => 'required|numeric|min:0',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::route('settings.BusinessSettingShow')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $settings = [
+            'platform_commission' => $request->input('platform_commission'),
+            'vendor_commission' => $request->input('vendor_commission'),
+        ];
+
+        foreach ($settings as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+
+        return Redirect::route('settings.BusinessSettingShow')->with('success', 'Settings updated successfully.');
+    }
+
+    //payment conf
+    public function PaymentConfShow()
+    {
+        $settings = [
+            'payment_gateway_title' => settings('payment_gateway_title'),
+            'api_key' => settings('api_key'),
+            'api_secret_key' => settings('api_secret_key'),
+            'mode' => settings('mode'),
+        ];
+
+        return Inertia::render('PaymentGateway/PaymentGateway', ['settings' => $settings]);
+    }
+    public function PaymentConfUpdate(Request $request): RedirectResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'payment_gateway_title' => 'required|string',
+            'api_key' => 'required|string',
+            'api_secret_key' => 'required|string',
+            'mode' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::route('settings.PaymentConfShow')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $settings = [
+            'payment_gateway_title' => $request->input('payment_gateway_title'),
+            'api_key' => $request->input('api_key'),
+            'api_secret_key' => $request->input('api_secret_key'),
+            'mode' => $request->input('mode'),
+        ];
+
+        foreach ($settings as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+
+        return Redirect::route('settings.PaymentConfShow')->with('success', 'Settings updated successfully.');
+    }
 }

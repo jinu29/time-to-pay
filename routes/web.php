@@ -247,9 +247,23 @@ require __DIR__ . '/auth.php';
 
 
 //User Management
-Route::get('/user_management', [UserManagementController::class, 'index'])->name('user.index');
-Route::post('/user_management', [UserManagementController::class, 'store']);
-Route::put('/user_management/{id}', [UserManagementController::class, 'update']);
-Route::delete('/user_management{id}', [UserManagementController::class, 'destroy']);
+Route::prefix('user_management')->group(function (){
+    //user
+    Route::get('/user', [UserManagementController::class, 'index'])->name('user.index');
+    Route::post('/user', [UserManagementController::class, 'store']);
+    Route::put('/user/{id}', [UserManagementController::class, 'update']);
+    Route::delete('/user{id}', [UserManagementController::class, 'destroy']);
+    //KYC
+    Route::get('/KYC', [UserManagementController::class, 'UserKYC']);
+});
 
-require __DIR__ . '/auth.php';
+
+//Business Settings
+Route::get('/business-settings', [SettingsController::class, 'BusinessSettingShow'])->name('settings.BusinessSettingShow');
+Route::post('/business-settings/update', [SettingsController::class, 'BusinessSettingUpdate'])->name('settings.BusinessSettingUpdate');
+
+//
+Route::prefix('setting')->group(function (){
+    Route::get('/payment_conf', [SettingsController::class, 'PaymentConfShow'])->name('settings.PaymentConfShow');
+    Route::post('/payment_conf/update', [SettingsController::class, 'PaymentConfUpdate'])->name('settings.PaymentConfUpdate');     
+});

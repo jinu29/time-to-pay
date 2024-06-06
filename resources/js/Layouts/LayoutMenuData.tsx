@@ -487,10 +487,28 @@ const Navdata = () => {
         },
 
         {
-            id: "user_management",
             label: "User Management",
+            isHeader: true,
+        },
+
+        {
+            id: "user_management",
+            label: "User",
             icon: "ri-account-circle-line",
-            link: "/user_management",
+            link: "/user_management/user",
+            click: function (e : any) {
+                e.preventDefault();
+                setIsAuth(!isAuth);
+                setIscurrentState('Auth');
+                updateIconSidebar(e);
+            },
+            stateVariables: isAuth,
+        },
+        {
+            id: "UserKYCTracking",
+            label: "KYC ",
+            icon: "ri-account-circle-line",
+            link: "/user_management/KYC",
             click: function (e : any) {
                 e.preventDefault();
                 setIsAuth(!isAuth);
@@ -523,6 +541,32 @@ const Navdata = () => {
             label: "OTP conf",
             icon: "ri-lock-password-line",
             link: "/settings/otp_conf",
+            click: function (e : any) {
+                e.preventDefault();
+                setIsAuth(!isAuth);
+                setIscurrentState('Auth');
+                updateIconSidebar(e);
+            },
+            stateVariables: isAuth,
+        },
+        {
+            id: "bussinesssettings",
+            label: "Bussiness Settings",
+            icon: "ri-settings-3-line",
+            link: "/business-settings",
+            click: function (e : any) {
+                e.preventDefault();
+                setIsAuth(!isAuth);
+                setIscurrentState('Auth');
+                updateIconSidebar(e);
+            },
+            stateVariables: isAuth,
+        },
+        {
+            id: "paymentconf",
+            label: "Payment Conf",
+            icon: "ri-settings-3-line",
+            link: "/setting/payment_conf",
             click: function (e : any) {
                 e.preventDefault();
                 setIsAuth(!isAuth);

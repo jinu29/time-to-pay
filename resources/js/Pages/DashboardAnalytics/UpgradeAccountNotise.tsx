@@ -21,7 +21,7 @@ const UpgradeAccountNotise = () => {
                                     className="text-primary me-2 icon-sm"
                                 />
                                 <div className="flex-grow-1 text-truncate">
-                                    Your free trial expired in <b>17</b> days.
+                                    We are Working On it <b> Soon Launch !</b>.
                                 </div>
                                 <div className="flex-shrink-0">
                                     <Link href="/pages-pricing" className="text-reset text-decoration-underline"><b>Upgrade</b></Link>

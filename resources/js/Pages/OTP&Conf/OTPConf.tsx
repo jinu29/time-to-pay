@@ -23,9 +23,10 @@ const OTPConf = () => {
         encryption: settings.encryption || '',
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setData(e.target.id as keyof typeof data, e.target.value);
+    const handleChange = (e) => {
+        setData(e.target.id, e.target.value);
     };
+
 
     const handleSubmit = (e: any) => {
         e.preventDefault();

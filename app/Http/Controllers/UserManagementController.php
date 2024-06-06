@@ -13,7 +13,9 @@ class UserManagementController extends Controller
     public function index()
     {
         // return response()->json(User::all());
-        return Inertia::render('UserManagement/index');
+        // return Inertia::render('UserManagement/index');
+        $users = User::all();
+        return Inertia::render('UserManagement/UserManagement', ['users' => $users]);
     }
 
     // Store a new user
@@ -61,5 +63,14 @@ class UserManagementController extends Controller
         User::findOrFail($id)->delete();
 
         return response()->json(null, 204);
+    }
+
+    //user kyc tracking
+    public function UserKYC()
+    {
+        // return response()->json(User::all());
+        // return Inertia::render('UserManagement/index');
+        $users = User::all();
+        return Inertia::render('UserManagement/UserKYC', ['users' => $users]);
     }
 }
