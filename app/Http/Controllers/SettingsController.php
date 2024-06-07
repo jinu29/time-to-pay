@@ -98,17 +98,13 @@ class SettingsController extends Controller
             'sms_password' => $request->input('sms_password'),
         ];
 
-        foreach ($settings as $key => $value) {
-            Setting::updateOrCreate(
-                ['key' => $key],
-                ['value' => $value]
-            );
+        foreach ($request->except('_token') as $key => $value) {
+            settings($key, $value);
         }
 
-        // Redirect back with success message
-        return redirect()
-            ->route('settings.showOTPConf')
-            ->with('success', 'Settings updated successfully.');
+        return Redirect::route('settings.showOTPConf')->with('success', 'Settings updated successfully.');
+
+
     }
     
     //Business Setting
@@ -145,6 +141,9 @@ class SettingsController extends Controller
                 ['value' => $value]
             );
         }
+        // foreach ($request->except('_token') as $key => $value) {
+        //     settings($key, $value);
+        // }
 
         return Redirect::route('settings.BusinessSettingShow')->with('success', 'Settings updated successfully.');
     }
@@ -183,11 +182,15 @@ class SettingsController extends Controller
             'mode' => $request->input('mode'),
         ];
 
-        foreach ($settings as $key => $value) {
-            Setting::updateOrCreate(
-                ['key' => $key],
-                ['value' => $value]
-            );
+        // foreach ($settings as $key => $value) {
+        //     Setting::updateOrCreate(
+        //         ['key' => $key],
+        //         ['value' => $value]
+        //     );
+        // }
+
+        foreach ($request->except('_token') as $key => $value) {
+            settings($key, $value);
         }
 
         return Redirect::route('settings.PaymentConfShow')->with('success', 'Settings updated successfully.');

@@ -238,10 +238,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
 Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
 Route::get('/settings/otp_conf', [SettingsController::class, 'ShowOTPconf'])->name('settings.ShowOTPconf');
-Route::post('/settings/update/otp_conf', [SettingsController::class, 'updateOTPConf'])->name('settings.updateOTPConf');
+Route::post('/settings/otp_conf', [SettingsController::class, 'updateOTPConf'])->name('settings.updateOTPConf');
 
 require __DIR__ . '/auth.php';
 
@@ -260,10 +260,10 @@ Route::prefix('user_management')->group(function (){
 
 //Business Settings
 Route::get('/business-settings', [SettingsController::class, 'BusinessSettingShow'])->name('settings.BusinessSettingShow');
-Route::post('/business-settings/update', [SettingsController::class, 'BusinessSettingUpdate'])->name('settings.BusinessSettingUpdate');
+Route::post('/business-settings', [SettingsController::class, 'BusinessSettingUpdate'])->name('settings.BusinessSettingUpdate');
 
 //
 Route::prefix('setting')->group(function (){
     Route::get('/payment_conf', [SettingsController::class, 'PaymentConfShow'])->name('settings.PaymentConfShow');
-    Route::post('/payment_conf/update', [SettingsController::class, 'PaymentConfUpdate'])->name('settings.PaymentConfUpdate');     
+    Route::post('/payment_conf', [SettingsController::class, 'PaymentConfUpdate'])->name('settings.PaymentConfUpdate');     
 });

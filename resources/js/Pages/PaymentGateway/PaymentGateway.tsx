@@ -21,7 +21,7 @@ const PaymentConf = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('settings.update'), data);
+        post(route('settings.PaymentConfUpdate'), data);
     };
 
     return (

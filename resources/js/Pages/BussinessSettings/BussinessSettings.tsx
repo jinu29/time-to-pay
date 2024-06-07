@@ -19,7 +19,7 @@ const BusinessSettings = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('settings.update'), data);
+        post(route('settings.BusinessSettingUpdate'), data);
     };
 
     return (

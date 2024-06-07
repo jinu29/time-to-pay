@@ -1,1 +1,0 @@
-import{r as s}from"./app-DAEZisrD.js";function f(t,o){if(t==null)return{};var e={};for(var n in t)if({}.hasOwnProperty.call(t,n)){if(o.indexOf(n)>=0)continue;e[n]=t[n]}return e}const i=t=>!t||typeof t=="function"?t:o=>{t.current=o};function u(t,o){const e=i(t),n=i(o);return r=>{e&&e(r),n&&n(r)}}function a(t,o){return s.useMemo(()=>u(t,o),[t,o])}export{f as _,a as u};

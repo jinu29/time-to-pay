@@ -8,7 +8,7 @@ import Layout from '../../Layouts';
 const OTPConf = () => {
     const { settings } = usePage<any>().props;
     const [isEmail, setIsEmail] = useState(true);
-    const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+    const [showPassword, setShowPassword] = useState(false); 
 
     const { data, setData, post, processing, errors } = useForm<any>({
         email_smtp: settings.email_smtp || '',
@@ -280,7 +280,7 @@ const OTPConf = () => {
                                                 <Button className="btn btn-primary" type="submit" disabled={processing}>
                                                     {processing ? 'Updating...' : 'Update'}
                                                 </Button>
-                                            </Col>
+                                            </Col> 
                                         </Row>
                                     </Form>
                                 </Card.Body>
