@@ -15,6 +15,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+
 -- Dumping structure for table time_to_pay.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -38,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table time_to_pay.migrations: ~0 rows (approximately)
+-- Dumping data for table time_to_pay.migrations: ~6 rows (approximately)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
@@ -102,9 +103,9 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `settings_key_unique` (`key`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table time_to_pay.settings: ~0 rows (approximately)
+-- Dumping data for table time_to_pay.settings: ~7 rows (approximately)
 INSERT INTO `settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
 	(1, 'prod_url', 'https://api.eko.in:25002/ekoicici', '2024-06-03 05:00:29', '2024-06-03 05:00:29'),
 	(2, 'dev_key', '5656', '2024-06-03 05:00:29', '2024-06-03 05:00:29'),
@@ -113,7 +114,13 @@ INSERT INTO `settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
 	(5, 'initiator_id', '7708080885', '2024-06-03 05:00:29', '2024-06-03 05:00:29'),
 	(6, 'authenticator_key', 'sadfsdf', '2024-06-03 05:00:29', '2024-06-03 05:00:29'),
 	(7, 'user_code', 'sdfsdf', '2024-06-03 05:00:29', '2024-06-03 05:00:29'),
-	(8, 'customer_id', 'real', '2024-06-03 06:30:09', '2024-06-03 06:33:34');
+	(8, 'customer_id', '1234', '2024-06-03 06:30:09', '2024-06-04 01:37:47'),
+	(9, 'payment_gateway_title', 'RazorPay', '2024-06-07 22:40:57', '2024-06-07 22:40:57'),
+	(10, 'api_key', 'ss', '2024-06-07 22:40:57', '2024-06-07 22:41:04'),
+	(11, 'api_secret_key', 'ss', '2024-06-07 22:40:57', '2024-06-07 22:41:04'),
+	(12, 'mode', 'Test', '2024-06-07 22:40:57', '2024-06-07 22:41:04'),
+	(13, 'platform_commission', '33', '2024-06-07 22:43:50', '2024-06-07 22:43:50'),
+	(14, 'vendor_commission', '33', '2024-06-07 22:43:50', '2024-06-07 22:43:50');
 
 -- Dumping structure for table time_to_pay.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -125,14 +132,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table time_to_pay.users: ~0 rows (approximately)
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$3G9.O76ll.boJISG9JlDwOx8XVr1ylWHEAmL9Eoi4wBPOh7OgrnHi', NULL, '2024-06-03 00:31:55', '2024-06-03 05:34:39'),
-	(2, 'akhil', 't.p.akhiljinu@gmail.com', NULL, '$2y$12$2Sp5NYx0Ikvbn4t7/5DZAuRuGKnqZr5dErv1LX0NsgVISxLDXl33e', NULL, '2024-06-03 06:49:23', '2024-06-03 06:49:23');
+-- Dumping data for table time_to_pay.users: ~4 rows (approximately)
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
+	(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$3G9.O76ll.boJISG9JlDwOx8XVr1ylWHEAmL9Eoi4wBPOh7OgrnHi', NULL, '2024-06-03 00:31:55', '2024-06-03 05:34:39', 'admin'),
+	(2, 'akhil', 't.p.akhiljinu@gmail.com', NULL, '$2y$12$2Sp5NYx0Ikvbn4t7/5DZAuRuGKnqZr5dErv1LX0NsgVISxLDXl33e', NULL, '2024-06-03 06:49:23', '2024-06-03 06:49:23', NULL),
+	(3, 'akhil', 'akhil@gmail.com', NULL, '$2y$12$shNhDSCzi6mkPx8PpSuPiOPiPAQuGdRY/7FsKTjkhnMiJigIEKB9C', NULL, '2024-06-08 04:56:32', '2024-06-08 04:56:32', 'user'),
+	(4, 'keerthi', 'keerthi@gmail.com', NULL, '$2y$12$q1gcm.nc3A8FCz9tPrI93.pl4ZshU3KJx9UQgobdFPFdaF7QULi82', NULL, '2024-06-08 05:27:49', '2024-06-08 05:27:49', 'user');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
