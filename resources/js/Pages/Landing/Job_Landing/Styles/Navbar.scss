@@ -1,3 +1,17 @@
+.navbar {
+    background-color: black;
+    color: white;
+}
+
 .card-logo {
     width: 100px;
+}
+
+.navbar.is-sticky .nav-item li{
+    color: black;
+}
+
+.navbar-landing.is-sticky{
+    background-color: black !important;
+    color: white !important;
 }

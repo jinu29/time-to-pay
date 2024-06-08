@@ -24,7 +24,7 @@ const Home = () => {
             <Col lg={6}>
               <div>
                 <h1 className="display-6 fw-semibold text-capitalize mb-3 lh-base">
-                  Find your next job and build your dream here
+                  Simple and easy payment gateway methods
                 </h1>
                 <p className="lead text-muted lh-base mb-4">
                   Find jobs, create trackable resumes and enrich your
@@ -62,7 +62,7 @@ const Home = () => {
                           onClick={e => e.preventDefault()}
                         >
                           <i className="ri-search-2-line align-bottom me-1"></i>{" "}
-                          Find Job
+                          Find Loan
                         </button>
                       </div>
                     </Col>

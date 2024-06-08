@@ -140,7 +140,7 @@ const Navdata = () => {
             id: "dashboard",
             label: "Dashboard",
             icon: "ri-dashboard-2-line",
-            link: "/dashboard-analytics",
+            link: "/dashboard",
             stateVariables: isDashboard,
             click: function (e : any) {
                 e.preventDefault();

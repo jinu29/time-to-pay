@@ -31,7 +31,16 @@ use App\Http\Controllers\UserManagementController;
 
 // Route::get("/apps-ecommerce-orders", [ProfileController::class, 'index'])->name('order-list');
 Route::redirect('/', '/dashboard');
-Route::middleware('auth')->group(function () {
+
+// user routes
+Route::controller(VelzonRoutesController::class)->group(function () {
+    Route::get("/", "job_landing");
+    Route::get("/auth-signin", "auth_signin_cover");
+    Route::get("/auth-signup", "auth_signup_cover");
+});
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/profile-edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile-update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile-destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -55,7 +64,7 @@ Route::middleware('auth')->group(function () {
 
         // dashboard routes
         // Route::get("/", "index");
-        Route::get("/dashboard-analytics", "dashboard_analytics");
+        Route::get("/dashboard", "dashboard_analytics");
         Route::get("/dashboard-crm", "dashboard_crm");
         Route::get("/dashboard", "dashboard");
         Route::get("/dashboard-crypto", "dashboard_crypto");
@@ -209,9 +218,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/forgot-password", "forgot_password");
         Route::get("/register", "register");
         Route::get("/auth-signin-basic", "auth_signin_basic");
-        Route::get("/auth-signin-cover", "auth_signin_cover");
         Route::get("/auth-signup-basic", "auth_signup_basic");
-        Route::get("/auth-signup-cover", "auth_signup_cover");
         Route::get("/auth-pass-reset-basic", "auth_pass_reset_basic");
         Route::get("/auth-pass-reset-cover", "auth_pass_reset_cover");
         Route::get("/auth-lockscreen-basic", "auth_lockscreen_basic");
@@ -228,7 +235,6 @@ Route::middleware('auth')->group(function () {
         Route::get("/auth-500", "auth_500");
         Route::get("/landing", "landing");
         Route::get("/nft-landing", "nft_landing");
-        Route::get("/", "job_landing");
         Route::get("/auth-pass-change-basic", "auth_pass_change_basic");
         Route::get("/auth-pass-change-cover", "auth_pass_change_cover");
         Route::get("/auth-offline", "auth_offline");
@@ -247,7 +253,7 @@ require __DIR__ . '/auth.php';
 
 
 //User Management
-Route::prefix('user_management')->group(function (){
+Route::prefix('user_management')->group(function () {
     //user
     Route::get('/user', [UserManagementController::class, 'index'])->name('user.index');
     Route::post('/user', [UserManagementController::class, 'store']);
@@ -263,7 +269,14 @@ Route::get('/business-settings', [SettingsController::class, 'BusinessSettingSho
 Route::post('/business-settings', [SettingsController::class, 'BusinessSettingUpdate'])->name('settings.BusinessSettingUpdate');
 
 //
-Route::prefix('setting')->group(function (){
+Route::prefix('setting')->group(function () {
     Route::get('/payment_conf', [SettingsController::class, 'PaymentConfShow'])->name('settings.PaymentConfShow');
-    Route::post('/payment_conf', [SettingsController::class, 'PaymentConfUpdate'])->name('settings.PaymentConfUpdate');     
+    Route::post('/payment_conf', [SettingsController::class, 'PaymentConfUpdate'])->name('settings.PaymentConfUpdate');
+});
+
+
+//distributer
+
+Route::middleware(['auth', 'distributor'])->group(function () {
+    // Distributor routes here
 });

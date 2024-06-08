@@ -6,10 +6,19 @@ import {
   Container,
   NavbarToggle,
   NavLink,
+  Dropdown,
+  DropdownButton,
+  Badge,
 } from "react-bootstrap";
 import Logo from '../../../../images/img/logo.png';
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
+import { Inertia } from '@inertiajs/inertia';
+
 const Navbar = () => {
+  const { auth } = usePage().props;
+
+  const user = auth.user;
+
   const [isOpenMenu, setisOpenMenu] = useState<boolean>(false);
   const [navClass, setnavClass] = useState<any>("");
 
@@ -56,6 +65,10 @@ const Navbar = () => {
     };
   }, [activeLink]);
 
+  const handleLogout = () => {
+    Inertia.post(route('logout'));
+  };
+
   return (
     <React.Fragment>
       <nav
@@ -88,60 +101,68 @@ const Navbar = () => {
 
           <Collapse className="navbar-collapse d-flex justify-content-end" in={isOpenMenu}>
             <>
-            <Scrollspy
-              offset={-18}
-              items={[
-                "hero",
-                "process",
-                "categories",
-                "findJob",
-                "candidates",
-                "blog",
-              ]}
-              currentClassName="active"
-              className="navbar-nav align-items-center mt-2 mt-lg-0"
-              id="navbar-example"
-            >
-              <li className="nav-item">
-                <NavLink className="fs-16" href="#hero">
-                  Home
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="fs-16" href="#process">
-                  Process
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="fs-16" href="#categories">
-                  Categories
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="fs-16" href="#findJob">
-                  Find Jobs
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="fs-16" href="#candidates">
-                  Candidates
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="fs-16" href="#blog">
-                  Blog
-                </NavLink>
-              </li>
+              <Scrollspy
+                offset={-18}
+                items={[
+                  "hero",
+                  "process",
+                  "categories",
+                  "findJob",
+                  "candidates",
+                  "blog",
+                ]}
+                currentClassName="active"
+                className="navbar-nav align-items-center mt-2 mt-lg-0"
+                id="navbar-example"
+              >
+                <li className="nav-item">
+                  <NavLink className="fs-16 text-white" href="#hero">
+                    Home
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="fs-16 text-white" href="#process">
+                    About
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="fs-16 text-white" href="#categories">
+                    Blog
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="fs-16 text-white" href="#findJob">
+                    Services
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="fs-16 text-white" href="#candidates">
+                    Contact
+                  </NavLink>
+                </li>
 
-              <div>
-                <Link href="/auth-signin-basic" className="btn btn-soft-primary">
-                  <i className="ri-user-3-line align-bottom me-1"></i> Login &
-                  Register
-                </Link>
-            </div>
-            </Scrollspy>
+                {user ? (
+                  <DropdownButton
+                    id="dropdown-basic-button"
+                    title={<Badge bg="primary" className="fs-14 text-uppercase">{user.name.charAt(0)}</Badge>}
+                    variant="dark"
+                  >
+                    <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                    <Dropdown.Item href="/settings">Settings</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
 
-            
+
+                  </DropdownButton>
+                ) : (
+                  <Link href="/login" className="btn btn-soft-primary">
+                    <i className="ri-user-3-line align-bottom me-1"></i> Login &
+                    Register
+                  </Link>
+                )}
+              </Scrollspy>
+
+
             </>
           </Collapse>
         </Container>

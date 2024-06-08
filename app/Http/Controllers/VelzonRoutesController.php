@@ -14,6 +14,7 @@ class VelzonRoutesController extends Controller
         return Inertia::render('DashboardEcommerce/index');
     }
 
+
     public function dashboard_analytics()
     {
         return Inertia::render('DashboardAnalytics/index');

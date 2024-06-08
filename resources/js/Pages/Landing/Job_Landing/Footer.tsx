@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import LogoLight from "../../../../images/logo-light.png";
 import { Link } from "@inertiajs/react";
+import Logo from '../../../../images/img/logo.png';
 
 const Footer = () => {
   return (
@@ -12,14 +13,11 @@ const Footer = () => {
             <Col className="col-lg-4 mt-4">
               <div>
                 <div>
-                  <img src={LogoLight} alt="logo light" height="17" />
+                  <img src={Logo} style={{height:"150px", width:"250px"}} alt="logo light" height="17" />
                 </div>
                 <div className="mt-4 fs-13">
-                  <p>Premium Multipurpose Admin & Dashboard Template</p>
                   <p>
-                    You can build any type of web application like eCommerce,
-                    CRM, CMS, Project management apps, Admin Panels, etc using
-                    Velzon.
+                  Welcome to Timetopay, your one-stop solution for hassle-free utility payments. Our platform simplifies the process of paying your bills, whether it's electricity, water, gas, or any other essential service. With our secure and convenient online portal, you can easily manage your payments, track your usage, and stay on top of your expenses. Say goodbye to long queues and late payments – join Timntopay today and experience the ease of managing your utilities from anywhere, at any time..
                   </p>
                   <ul className="list-inline mb-0 footer-social-link">
                     <li className="list-inline-item">
@@ -131,7 +129,7 @@ const Footer = () => {
               <div>
                 <p className="copy-rights mb-0">
                   {new Date().getFullYear()} ©
-                  Velzon - Themesbrand
+                  Timetopay - CodeGen
                 </p>
               </div>
             </Col>
