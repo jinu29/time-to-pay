@@ -7,24 +7,21 @@ const Process = () => {
     <React.Fragment>
       <section className="section" id="process">
         <Container>
-          <Row className="justify-content-center">
+          <Row className="">
             <Col lg={8}>
-              <div className="text-center mb-5">
+              <div className="mb-5">
                 <h1 className="mb-3 ff-secondary fw-semibold lh-base">
-                  How <span className="text-primary">it's work</span> creative
-                  jobs & quickly features
+                  Our Features
                 </h1>
                 <p className="text-muted">
-                  A creative person has the ability to invent and develop
-                  original ideas, especially in the arts. Like so many creative
-                  people, he was never satisfied.
+                  With our user-friendly interface, you can initiate a transfer in just a few clicks. Our system uses the latest encryption technology to ensure your personal and financial information is kept safe and secure. Plus, our competitive exchange rates mean you get the most for your money.
                 </p>
               </div>
             </Col>
           </Row>
           <Row>
             {jobProcess.map((item, key) => (
-              <Col lg={3} md={6} key={key}>
+              <Col lg={4} md={6} key={key}>
                 <Card className={key === 0 ? "card shadow-lg" : "card shadow-none card-border-effect-none border-0"}>
                   <Card.Body className="p-4">
                   <h1 className={`fw-bold display-5 ff-secondary mb-4 text-${item.text} position-relative`}>

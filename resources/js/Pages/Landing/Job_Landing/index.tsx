@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Home from "./Home";
 import Navbar from "./Navbar";
 import Process from "./Process";
+import Logo from "./Logo";
 import { Head } from "@inertiajs/react";
 
 const JobLanding = () => {
@@ -41,6 +42,7 @@ const JobLanding = () => {
       <div className="layout-wrapper landing">
         <Navbar />
         <Home />
+        <Logo />
         <Process />
         <Features />
         <Categories />

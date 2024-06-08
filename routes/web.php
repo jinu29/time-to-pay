@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(VelzonRoutesController::class)->group(function () {
 
         // dashboard routes
-        Route::get("/", "index");
+        // Route::get("/", "index");
         Route::get("/dashboard-analytics", "dashboard_analytics");
         Route::get("/dashboard-crm", "dashboard_crm");
         Route::get("/dashboard", "dashboard");
@@ -228,7 +228,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/auth-500", "auth_500");
         Route::get("/landing", "landing");
         Route::get("/nft-landing", "nft_landing");
-        Route::get("/job-landing", "job_landing");
+        Route::get("/", "job_landing");
         Route::get("/auth-pass-change-basic", "auth_pass_change_basic");
         Route::get("/auth-pass-change-cover", "auth_pass_change_cover");
         Route::get("/auth-offline", "auth_offline");
