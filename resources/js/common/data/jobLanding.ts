@@ -22,12 +22,7 @@ const jobProcess = [
     id: 3,
     lable: "Find Job",
     desc: "Search for your dream jobs from velzon.",
-  },
-  {
-    id: 4,
-    lable: "Apply Job",
-    desc: "Apply to the compnay and wait for interview.",
-  },
+  }
 ];
 
 const categories = [

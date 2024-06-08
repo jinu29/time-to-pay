@@ -34,7 +34,7 @@ const UserManagement = ({ users }) => {
         }
     }, [users]);
 
-    const handleDelete = (id) => {
+    const handleDelete = (id:number) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -42,7 +42,7 @@ const UserManagement = ({ users }) => {
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'No, cancel!',
-        }).then((result) => {
+        }).then((result:any) => {
             if (result.isConfirmed) {
                 fetch(`/user_management/user${id}`, {
                     method: 'DELETE',

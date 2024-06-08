@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Scrollspy from "react-scrollspy";
+import '../Job_Landing/Styles/Navbar.scss';
 import {
   Collapse,
   Container,
   NavbarToggle,
   NavLink,
 } from "react-bootstrap";
-import LogoDark from "../../../../images/logo-dark.png";
-import LogoLight from "../../../../images/logo-light.png";
+import Logo from '../../../../images/img/logo.png';
 import { Link } from "@inertiajs/react";
 const Navbar = () => {
   const [isOpenMenu, setisOpenMenu] = useState<boolean>(false);
@@ -68,16 +68,9 @@ const Navbar = () => {
         <Container fluid className="custom-container">
           <Link className="navbar-brand" href="/dashboard">
             <img
-              src={LogoDark}
+              src={Logo}
               className="card-logo card-logo-dark"
               alt="logo dark"
-              height="17"
-            />
-            <img
-              src={LogoLight}
-              className="card-logo card-logo-light"
-              alt="logo light"
-              height="17"
             />
           </Link>
           <NavbarToggle
@@ -93,7 +86,7 @@ const Navbar = () => {
             <i className="mdi mdi-menu"></i>
           </NavbarToggle>
 
-          <Collapse className="navbar-collapse" in={isOpenMenu}>
+          <Collapse className="navbar-collapse d-flex justify-content-end" in={isOpenMenu}>
             <>
             <Scrollspy
               offset={-18}
@@ -106,7 +99,7 @@ const Navbar = () => {
                 "blog",
               ]}
               currentClassName="active"
-              className="navbar-nav mx-auto mt-2 mt-lg-0"
+              className="navbar-nav align-items-center mt-2 mt-lg-0"
               id="navbar-example"
             >
               <li className="nav-item">
@@ -139,14 +132,16 @@ const Navbar = () => {
                   Blog
                 </NavLink>
               </li>
+
+              <div>
+                <Link href="/auth-signin-basic" className="btn btn-soft-primary">
+                  <i className="ri-user-3-line align-bottom me-1"></i> Login &
+                  Register
+                </Link>
+            </div>
             </Scrollspy>
 
-            <div>
-              <Link href="/auth-signin-basic" className="btn btn-soft-primary">
-                <i className="ri-user-3-line align-bottom me-1"></i> Login &
-                Register
-              </Link>
-            </div>
+            
             </>
           </Collapse>
         </Container>
