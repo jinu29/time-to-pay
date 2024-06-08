@@ -73,4 +73,81 @@ class UserManagementController extends Controller
         $users = User::all();
         return Inertia::render('UserManagement/UserKYC', ['users' => $users]);
     }
+    public function UserKYCUpdate(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'aadhaar' => 'nullable|string|max:255',
+            'pan' => 'nullable|string|max:255',
+            'phone' => 'nullable',
+        ]);
+
+        $user = User::create($validatedData);
+
+        return Inertia::render('UserManagement/UserKYC');
+    }
+    public function UserPaymentReport()
+    {
+        $users = User::all();
+        return Inertia::render('UserManagement/UserPaymentReport', ['users' => $users]);
+    }
+
+    //DistributorList
+    public function DistributorList()
+    {
+        $users = User::all();
+
+        return Inertia::render('Distributor/DistributorList', [
+            'users' => $users,
+        ]);
+    }
+
+    // Store a new distributor
+    public function DistributorListStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'nullable|string|max:20',
+            'password' => 'required|string|min:8',
+            'role' => 'required|string|max:50',
+        ]);
+
+        // Create the new user
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+
+        // Redirect to the distributor list with success message
+        // return Redirect::route('user.DistributorList')->with('success', 'Distributor created successfully.');
+        // return response()->json($user, 201);
+        return Inertia::render('Distributor/DistributorList');
+    }
+
+    public function UserKYCProfile()
+    {
+        
+        return Inertia::render('UserManagement/UserKYCProfile');
+    }
+    public function updateDistributorList(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'password' => 'required|string',
+            'role' => 'required|string|in:Distributor,User', 
+            'panCard' => 'required|string',
+            'aadhaarCard' => 'required|string',
+        ]);
+
+        return Inertia::render('UserManagement/UserKYCProfile', [
+            'users' => User::all(), 
+        ]);
+    }
 }

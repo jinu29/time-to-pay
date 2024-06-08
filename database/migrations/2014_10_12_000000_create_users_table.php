@@ -19,10 +19,20 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->string('role')->default('User');
             $table->rememberToken();
             $table->timestamps();
         });
-        User::create(["name" => "Admin", "email" => "admin@themesbrand.com", "password" => Hash::make(12345678), "email_verified_at" => now()]);
+       
+        // Create a default admin user
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@themesbrand.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
+            'role' => 'Admin', // Assigning 'Admin' role to the default admin user
+        ]);
     }
 
     /**

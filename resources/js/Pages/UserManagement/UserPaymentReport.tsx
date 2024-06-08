@@ -4,6 +4,7 @@ import BreadCrumb from '../../Components/Common/BreadCrumb';
 import { Head, Link } from '@inertiajs/react';
 import Layout from '../../Layouts';
 import Swal from 'sweetalert2';
+import * as FileSaver from 'file-saver-polyfill'; 
 
 const UserKYC = ({ users }) => {
     const [userList, setUserList] = useState(users || []);
@@ -11,35 +12,28 @@ const UserKYC = ({ users }) => {
     const [showEditModal, setShowEditModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
     const [formData, setFormData] = useState({
-        id: '',
         name: '',
         email: '',
-        pancard: '',
-        aadhaar: '',
     });
 
     useEffect(() => {
         if (!users) {
-            fetchUsers();
+            fetch('/user_management/user')
+                .then(response => {
+                    const contentType = response.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) {
+                        throw new TypeError("Expected JSON response but received HTML");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setUserList(data);
+                })
+                .catch(error => {
+                    setError(error.message);
+                });
         }
     }, [users]);
-
-    const fetchUsers = () => {
-        fetch('/user_management/user')
-            .then(response => {
-                const contentType = response.headers.get("content-type");
-                if (!contentType || !contentType.includes("application/json")) {
-                    throw new TypeError("Expected JSON response but received HTML");
-                }
-                return response.json();
-            })
-            .then(data => {
-                setUserList(data);
-            })
-            .catch(error => {
-                setError(error.message);
-            });
-    };
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -48,7 +42,7 @@ const UserKYC = ({ users }) => {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel',
+            cancelButtonText: 'No, cancel!',
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(`/user_management/user/${id}`, {
@@ -87,13 +81,7 @@ const UserKYC = ({ users }) => {
 
     const handleEdit = (user) => {
         setSelectedUser(user);
-        setFormData({
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            pancard: user.pancard || '',
-            aadhaar: user.aadhaar || '',
-        });
+        setFormData({ name: user.name, email: user.email });
         setShowEditModal(true);
     };
 
@@ -132,10 +120,11 @@ const UserKYC = ({ users }) => {
 
     return (
         <React.Fragment>
-            <Head title='User KYC | Time To Pay' />
+            <Head title='Payment Report | Time To Pay' />
             <div className="page-content">
                 <Container fluid>
-                    <BreadCrumb title="User KYC" pageTitle="Tables" />
+                    <h3>Payment Report</h3>
+                    {/* <BreadCrumb title="Payment ReportC" pageTitle="Tables" /> */}
                     <Row>
                         <Col xl={12}>
                             <Card>
@@ -149,8 +138,9 @@ const UserKYC = ({ users }) => {
                                                         <th scope="col">ID</th>
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Email</th>
-                                                        <th scope="col">Pancard</th>
-                                                        <th scope="col">Aadhaar</th>
+                                                        <th scope="col">Payment Mode</th>
+                                                        <th scope="col">Payment Status</th>
+                                                        <th scope="col">Verfied</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
@@ -160,14 +150,15 @@ const UserKYC = ({ users }) => {
                                                             <th scope="row"><Link href="#" className="fw-medium">{user.id}</Link></th>
                                                             <td>{user.name}</td>
                                                             <td>{user.email}</td>
-                                                            <td>{user.pancard}</td>
-                                                            <td>{user.aadhaar}</td>
+                                                            <td>Online</td>
+                                                            <td class='text-danger'>Not Paid</td>
+                                                            <td class='text-warning'>Failed</td>
                                                             <td>
                                                                 <Link href="#" className="me-2" onClick={() => handleEdit(user)}>
-                                                                    Edit
+                                                                    <i className="ri-pencil-line"></i>
                                                                 </Link>
                                                                 <Link href="#" onClick={() => handleDelete(user.id)}>
-                                                                    Delete
+                                                                    <i className="ri-delete-bin-line"></i> 
                                                                 </Link>
                                                             </td>
                                                         </tr>
@@ -204,24 +195,6 @@ const UserKYC = ({ users }) => {
                                 type="email"
                                 name="email"
                                 value={formData.email}
-                                onChange={handleInputChange}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Pancard</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="pancard"
-                                value={formData.pancard}
-                                onChange={handleInputChange}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Aadhaar</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="aadhaar"
-                                value={formData.aadhaar}
                                 onChange={handleInputChange}
                             />
                         </Form.Group>
