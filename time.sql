@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   UNIQUE KEY `settings_key_unique` (`key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table time_to_pay.settings: ~7 rows (approximately)
+-- Dumping data for table time_to_pay.settings: ~13 rows (approximately)
 INSERT INTO `settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
 	(1, 'prod_url', 'https://api.eko.in:25002/ekoicici', '2024-06-03 05:00:29', '2024-06-03 05:00:29'),
 	(2, 'dev_key', '5656', '2024-06-03 05:00:29', '2024-06-03 05:00:29'),
@@ -133,16 +133,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table time_to_pay.users: ~4 rows (approximately)
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-	(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$3G9.O76ll.boJISG9JlDwOx8XVr1ylWHEAmL9Eoi4wBPOh7OgrnHi', NULL, '2024-06-03 00:31:55', '2024-06-03 05:34:39', 'admin'),
-	(2, 'akhil', 't.p.akhiljinu@gmail.com', NULL, '$2y$12$2Sp5NYx0Ikvbn4t7/5DZAuRuGKnqZr5dErv1LX0NsgVISxLDXl33e', NULL, '2024-06-03 06:49:23', '2024-06-03 06:49:23', NULL),
-	(3, 'akhil', 'akhil@gmail.com', NULL, '$2y$12$shNhDSCzi6mkPx8PpSuPiOPiPAQuGdRY/7FsKTjkhnMiJigIEKB9C', NULL, '2024-06-08 04:56:32', '2024-06-08 04:56:32', 'user'),
-	(4, 'keerthi', 'keerthi@gmail.com', NULL, '$2y$12$q1gcm.nc3A8FCz9tPrI93.pl4ZshU3KJx9UQgobdFPFdaF7QULi82', NULL, '2024-06-08 05:27:49', '2024-06-08 05:27:49', 'user');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`, `phone`) VALUES
+	(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$3G9.O76ll.boJISG9JlDwOx8XVr1ylWHEAmL9Eoi4wBPOh7OgrnHi', NULL, '2024-06-03 00:31:55', '2024-06-03 05:34:39', 'admin', NULL),
+	(2, 'akhil', 't.p.akhiljinu@gmail.com', NULL, '$2y$12$2Sp5NYx0Ikvbn4t7/5DZAuRuGKnqZr5dErv1LX0NsgVISxLDXl33e', NULL, '2024-06-03 06:49:23', '2024-06-03 06:49:23', NULL, NULL),
+	(3, 'akhil', 'akhil@gmail.com', NULL, '$2y$12$shNhDSCzi6mkPx8PpSuPiOPiPAQuGdRY/7FsKTjkhnMiJigIEKB9C', NULL, '2024-06-08 04:56:32', '2024-06-08 04:56:32', 'user', NULL),
+	(4, 'keerthi', 'keerthi@gmail.com', NULL, '$2y$12$q1gcm.nc3A8FCz9tPrI93.pl4ZshU3KJx9UQgobdFPFdaF7QULi82', NULL, '2024-06-08 05:27:49', '2024-06-08 05:27:49', 'user', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

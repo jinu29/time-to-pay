@@ -5,46 +5,53 @@ import { Head, Link } from '@inertiajs/react';
 import Layout from '../../Layouts';
 import Swal from 'sweetalert2';
 
-const UserManagement = ({ users }) => {
+const UserKYC = ({ users }) => {
     const [userList, setUserList] = useState(users || []);
     const [error, setError] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
     const [formData, setFormData] = useState({
+        id: '',
         name: '',
         email: '',
+        pancard: '',
+        aadhaar: '',
     });
 
     useEffect(() => {
         if (!users) {
-            fetch('/user_management/user')
-                .then(response => {
-                    const contentType = response.headers.get("content-type");
-                    if (!contentType || !contentType.includes("application/json")) {
-                        throw new TypeError("Expected JSON response but received HTML");
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    setUserList(data);
-                })
-                .catch(error => {
-                    setError(error.message);
-                });
+            fetchUsers();
         }
     }, [users]);
 
-    const handleDelete = (id:number) => {
+    const fetchUsers = () => {
+        fetch('/user_management/user')
+            .then(response => {
+                const contentType = response.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    throw new TypeError("Expected JSON response but received HTML");
+                }
+                return response.json();
+            })
+            .then(data => {
+                setUserList(data);
+            })
+            .catch(error => {
+                setError(error.message);
+            });
+    };
+
+    const handleDelete = (id) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-        }).then((result:any) => {
+            cancelButtonText: 'No, cancel',
+        }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`/user_management/user${id}`, {
+                fetch(`/user_management/user/${id}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -80,7 +87,13 @@ const UserManagement = ({ users }) => {
 
     const handleEdit = (user) => {
         setSelectedUser(user);
-        setFormData({ name: user.name, email: user.email });
+        setFormData({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            pancard: user.pancard || '',
+            aadhaar: user.aadhaar || '',
+        });
         setShowEditModal(true);
     };
 
@@ -119,10 +132,10 @@ const UserManagement = ({ users }) => {
 
     return (
         <React.Fragment>
-            <Head title='User Management | Time To Pay' />
+            <Head title='User KYC | Time To Pay' />
             <div className="page-content">
                 <Container fluid>
-                    <BreadCrumb title="User Management" pageTitle="Tables" />
+                    <BreadCrumb title="User KYC" pageTitle="Tables" />
                     <Row>
                         <Col xl={12}>
                             <Card>
@@ -136,7 +149,8 @@ const UserManagement = ({ users }) => {
                                                         <th scope="col">ID</th>
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Email</th>
-                                                        <th scope="col">Email Verfied</th>
+                                                        <th scope="col">Pancard</th>
+                                                        <th scope="col">Aadhaar</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
@@ -146,13 +160,14 @@ const UserManagement = ({ users }) => {
                                                             <th scope="row"><Link href="#" className="fw-medium">{user.id}</Link></th>
                                                             <td>{user.name}</td>
                                                             <td>{user.email}</td>
-                                                            <td>{user.email_verified_at}</td>
+                                                            <td>{user.pancard}</td>
+                                                            <td>{user.aadhaar}</td>
                                                             <td>
                                                                 <Link href="#" className="me-2" onClick={() => handleEdit(user)}>
-                                                                    <i className="ri-pencil-line"></i>
+                                                                    Edit
                                                                 </Link>
                                                                 <Link href="#" onClick={() => handleDelete(user.id)}>
-                                                                    <i className="ri-delete-bin-line"></i> 
+                                                                    Delete
                                                                 </Link>
                                                             </td>
                                                         </tr>
@@ -192,6 +207,24 @@ const UserManagement = ({ users }) => {
                                 onChange={handleInputChange}
                             />
                         </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Pancard</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="pancard"
+                                value={formData.pancard}
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Aadhaar</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="aadhaar"
+                                value={formData.aadhaar}
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -207,5 +240,5 @@ const UserManagement = ({ users }) => {
     );
 };
 
-UserManagement.layout = (page) => <Layout children={page} />;
-export default UserManagement;
+UserKYC.layout = (page) => <Layout children={page} />;
+export default UserKYC;

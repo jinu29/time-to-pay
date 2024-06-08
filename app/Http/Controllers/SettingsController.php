@@ -135,15 +135,10 @@ class SettingsController extends Controller
             'vendor_commission' => $request->input('vendor_commission'),
         ];
 
-        foreach ($settings as $key => $value) {
-            Setting::updateOrCreate(
-                ['key' => $key],
-                ['value' => $value]
-            );
+      
+        foreach ($request->except('_token') as $key => $value) {
+            settings($key, $value);
         }
-        // foreach ($request->except('_token') as $key => $value) {
-        //     settings($key, $value);
-        // }
 
         return Redirect::route('settings.BusinessSettingShow')->with('success', 'Settings updated successfully.');
     }
@@ -195,4 +190,97 @@ class SettingsController extends Controller
 
         return Redirect::route('settings.PaymentConfShow')->with('success', 'Settings updated successfully.');
     }
+
+   // Mobile Conf Show
+   public function MobileConfShow()
+   {
+       $settings = [
+           'sms_gateway_url' => settings('sms_gateway_url'),
+           'sms_api_key' => settings('sms_api_key'),
+           'sms_sender_id' => settings('sms_sender_id'),
+           'sms_username' => settings('sms_username'),
+           'sms_password' => settings('sms_password'),
+           'encryption_type' => settings('encryption_type'),
+       ];
+
+       return Inertia::render('OTP&Conf/MobileOtpConfig', ['settings' => $settings]);
+   }
+
+   public function MobileConfUpdate(Request $request)
+   {
+       $validator = Validator::make($request->all(), [
+           'sms_gateway_url' => 'required|string',
+           'sms_api_key' => 'required|string',
+           'sms_sender_id' => 'required|string',
+           'sms_username' => 'required|string',
+           'sms_password' => 'required|string',
+           'encryption_type' => 'required|string|in:none,ssl,tls',
+       ]);
+
+       if ($validator->fails()) {
+           return Redirect::route('settings.MobileConfShow')
+               ->withErrors($validator)
+               ->withInput();
+       }
+
+       $settings = [
+           'sms_gateway_url' => $request->input('sms_gateway_url'),
+           'sms_api_key' => $request->input('sms_api_key'),
+           'sms_sender_id' => $request->input('sms_sender_id'),
+           'sms_username' => $request->input('sms_username'),
+           'sms_password' => $request->input('sms_password'),
+           'encryption_type' => $request->input('encryption_type'),
+       ];
+
+        foreach ($request->except('_token') as $key => $value) {
+            settings($key, $value);
+        }
+
+       return Redirect::route('settings.MobileConfShow')->with('success', 'Settings updated successfully.');
+   }
+
+   // Email Conf Show
+   public function EmailConfShow()
+   {
+       $settings = [
+           'email_smtp' => settings('email_smtp'),
+           'email_port' => settings('email_port'),
+           'email_username' => settings('email_username'),
+           'email_password' => settings('email_password'),
+           'email_encryption' => settings('email_encryption'),
+       ];
+
+       return Inertia::render('OTP&Conf/EmailOtpConfig', ['settings' => $settings]);
+   }
+
+   public function EmailConfUpdate(Request $request)
+   {
+       $validator = Validator::make($request->all(), [
+           'email_smtp' => 'required|string',
+           'email_port' => 'required|string',
+           'email_username' => 'required|string',
+           'email_password' => 'required|string',
+           'email_encryption' => 'required|string',
+       ]);
+
+       if ($validator->fails()) {
+           return Redirect::route('settings.EmailConfShow')
+               ->withErrors($validator)
+               ->withInput();
+       }
+
+       $settings = [
+           'email_smtp' => $request->input('email_smtp'),
+           'email_port' => $request->input('email_port'),
+           'email_username' => $request->input('email_username'),
+           'email_password' => $request->input('email_password'),
+           'email_encryption' => $request->input('email_encryption'),
+       ];
+
+        foreach ($request->except('_token') as $key => $value) {
+            settings($key, $value);
+        }
+   
+       return Redirect::route('settings.EmailConfShow')->with('success', 'Email settings updated successfully.');
+   }
 }

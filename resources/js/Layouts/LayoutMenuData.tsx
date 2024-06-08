@@ -517,6 +517,38 @@ const Navdata = () => {
             },
             stateVariables: isAuth,
         },
+        {
+            id: "UserPayment",
+            label: "Payment Report",
+            icon: "ri-account-circle-line",
+            link: "/user_management/payment_report",
+            click: function (e : any) {
+                e.preventDefault();
+                setIsAuth(!isAuth);
+                setIscurrentState('Auth');
+                updateIconSidebar(e);
+            },
+            stateVariables: isAuth,
+        },
+
+        {
+            label: "Distributor Management",
+            isHeader: true,
+        },
+
+        {
+            id: "DistributorList",
+            label: "Distributor List",
+            icon: "ri-account-circle-line",
+            link: "/distributor_management/distributor",
+            click: function (e : any) {
+                e.preventDefault();
+                setIsAuth(!isAuth);
+                setIscurrentState('Auth');
+                updateIconSidebar(e);
+            },
+            stateVariables: isAuth,
+        },
 
         {
             label: "Settings and Conf",
@@ -525,7 +557,7 @@ const Navdata = () => {
 
         {
             id: "eko",
-            label: "EKO Conf",
+            label: "EKO Configuration",
             icon: "ri-account-circle-line",
             link: "/eko",
             click: function (e : any) {
@@ -536,19 +568,46 @@ const Navdata = () => {
             },
             stateVariables: isAuth,
         },
+        // {
+        //     id: "otpconf",
+        //     label: "OTP conf",
+        //     icon: "ri-lock-password-line",
+        //     link: "/settings/otp_conf",
+        //     click: function (e : any) {
+        //         e.preventDefault();
+        //         setIsAuth(!isAuth);
+        //         setIscurrentState('Auth');
+        //         updateIconSidebar(e);
+        //     },
+        //     stateVariables: isAuth,
+        // },
         {
-            id: "otpconf",
-            label: "OTP conf",
-            icon: "ri-lock-password-line",
-            link: "/settings/otp_conf",
-            click: function (e : any) {
-                e.preventDefault();
-                setIsAuth(!isAuth);
-                setIscurrentState('Auth');
-                updateIconSidebar(e);
+                id: "otpconf",
+                label: "OTP Configuration",
+                icon: "ri-lock-password-line",
+                link: "/#",
+                click: function (e : any) {
+                    e.preventDefault();
+                    setIsPages(!isPages);
+                    setIscurrentState('Pages');
+                    updateIconSidebar(e);
+                },
+                stateVariables: isPages,
+                subItems: [
+                    {
+                        id: "Email_conf",
+                        label: "Email Configuration",
+                        link: "/setting/email-conf",
+                        parentId: "pages",
+                    },
+                    {
+                        id: "Mobile_conf",
+                        label: "Mobile Configuration",
+                        link: "/setting/mobile-conf",
+                        parentId: "pages",
+                    }
+                ]
             },
-            stateVariables: isAuth,
-        },
         {
             id: "bussinesssettings",
             label: "Bussiness Settings",
@@ -564,7 +623,7 @@ const Navdata = () => {
         },
         {
             id: "paymentconf",
-            label: "Payment Conf",
+            label: "Payment Configuration",
             icon: "ri-settings-3-line",
             link: "/setting/payment_conf",
             click: function (e : any) {

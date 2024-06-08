@@ -261,6 +261,18 @@ Route::prefix('user_management')->group(function () {
     Route::delete('/user{id}', [UserManagementController::class, 'destroy']);
     //KYC
     Route::get('/KYC', [UserManagementController::class, 'UserKYC']);
+    Route::post('/KYC', [UserManagementController::class, 'UserKYCUpdate']);
+    Route::get('/userkyc', [UserManagementController::class, 'UserKYCProfile']);
+    Route::post('/userkyc', [UserManagementController::class, 'updateDistributorList']);
+
+    //UserPaymentReport
+    Route::get('/payment_report', [UserManagementController::class, 'UserPaymentReport']);
+});
+
+//Distributor Management
+Route::prefix('distributor_management')->group(function (){
+    Route::get('/distributor', [UserManagementController::class, 'DistributorList'])->name('user.DistributorList');
+    Route::post('/distributor', [UserManagementController::class, 'DistributorListStore'])->name('user.DistributorListStore');
 });
 
 
@@ -279,4 +291,10 @@ Route::prefix('setting')->group(function () {
 
 Route::middleware(['auth', 'distributor'])->group(function () {
     // Distributor routes here
+    Route::post('/payment_conf', [SettingsController::class, 'PaymentConfUpdate'])->name('settings.PaymentConfUpdate');  
+    Route::get('/mobile-conf', [SettingsController::class, 'MobileConfShow'])->name('settings.MobileConfShow');
+    Route::post('/mobile-conf', [SettingsController::class, 'MobileConfUpdate'])->name('settings.MobileConfUpdate');
+    
+    Route::get('/email-conf', [SettingsController::class, 'EmailConfShow'])->name('settings.EmailConfShow');
+    Route::post('/email-conf', [SettingsController::class, 'EmailConfUpdate'])->name('settings.EmailConfUpdate');
 });
