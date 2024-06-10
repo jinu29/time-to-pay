@@ -1,0 +1,119 @@
+.profile {
+    margin-top: 10rem;
+}
+
+.user-profile {
+    padding: 15px 25px;
+    border: 1px solid black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-profile h4 {
+    align-self: flex-start;
+}
+
+.user-image {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 50%;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.user-profile h5 {
+    margin-top: 15px;
+}
+
+.profile-details {
+    width: 100%;
+    padding: 15px 25px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-details p {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.kyc-details {
+    padding: 15px 25px;
+    border: 1px solid black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.kyc-title {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.kyc-title h4 {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.kyc-title p {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.form {
+    margin-top: 20px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid black;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-details {
+    display: flex;
+}
+
+.kyc-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.kyc-inputs span {
+    margin-top: 7px;
+}
+
+.error {
+    font-size: 13px;
+    font-weight: 600;
+    color: red;
+}
+
+.success {
+    font-size: 13px;
+    font-weight: 600;
+    color: green;
+}
+
+.verify {
+    padding: 10px 15px;
+    border-radius: 8px; 
+    background: black;
+    color: white ;
+    outline: none;
+    width: 200px;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
