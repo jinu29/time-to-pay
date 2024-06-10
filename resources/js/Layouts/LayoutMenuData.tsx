@@ -505,6 +505,19 @@ const Navdata = () => {
             stateVariables: isAuth,
         },
         {
+            id: "KYCRegister",
+            label: "KYC Register",
+            icon: "ri-account-circle-line",
+            link: "/user_management/userkyc",
+            click: function (e : any) {
+                e.preventDefault();
+                setIsAuth(!isAuth);
+                setIscurrentState('Auth');
+                updateIconSidebar(e);
+            },
+            stateVariables: isAuth,
+        },
+        {
             id: "UserKYCTracking",
             label: "KYC ",
             icon: "ri-account-circle-line",
