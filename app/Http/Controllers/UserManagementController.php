@@ -70,7 +70,7 @@ class UserManagementController extends Controller
     {
         // return response()->json(User::all());
         // return Inertia::render('UserManagement/index');
-        $users = User::all();
+        $users = User::with('kyc')->get();
         return Inertia::render('UserManagement/UserKYC', ['users' => $users]);
     }
     public function UserKYCUpdate(Request $request)

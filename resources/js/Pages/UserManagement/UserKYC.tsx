@@ -7,7 +7,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const UserKYC = () => {
     const { users = [] } = usePage().props;
-
+    console.log(users,"user")
     const handleEdit = (userId) => {
         // Handle edit functionality
         console.log('Editing user with ID:', userId);
@@ -32,34 +32,49 @@ const UserKYC = () => {
                                     <Table responsive>
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                {/* <th>ID</th> */}
+                                                <th>User ID</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>PAN Card</th>
                                                 <th>Aadhar Number</th>
-                                                <th>Role</th>
+                                                <th>Account NO</th>
+                                                <th>IFSC Code</th>
                                                 <th>KYC Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {users.map((user, index) => (
-                                                <tr key={index}>
-                                                    <td>{user.id}</td>
-                                                    <td>{user.name}</td>
-                                                    <td>{user.email}</td>
-                                                    <td>{user.panCard}</td>
-                                                    <td>{user.aadhar}</td>
-                                                    <td>{user.role}</td>
-                                                    <td>Failed</td>
-                                                    
-                                                </tr>
-                                            ))}
-                                            {users.length === 0 && (
+                                            {users.length > 0 ? (
+                                                users.map((user: any, index: number) => (
+                                                    <tr key={index}>
+                                                        <td>{user.id}</td>
+                                                        <td>{user.name}</td>
+                                                        <td>{user.email}</td>
+                                                        {user.kyc ? (
+                                                            <>
+                                                                <td>{user.kyc.pan_number}</td>
+                                                                <td>{user.kyc.aadhar_number}</td>
+                                                                <td>{user.kyc.account_number}</td>
+                                                                <td>{user.kyc.ifsc_code}</td>
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <td>NA</td>
+                                                                <td>NA</td>
+                                                                <td>NA</td>
+                                                                <td>NA</td>
+                                                            </>
+                                                        )}
+                                                        <td>Failed</td>
+                                                    </tr>
+                                                ))
+                                            ) : (
                                                 <tr>
-                                                    <td colSpan="7" className="text-center">No distributors found</td>
+                                                    <td colSpan="8" className="text-center">No distributors found</td>
                                                 </tr>
                                             )}
                                         </tbody>
+
                                     </Table>
                                 </Card.Body>
                             </Card>

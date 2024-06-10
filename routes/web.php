@@ -8,6 +8,7 @@ use App\Http\Controllers\VelzonRoutesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\UserKYCController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,12 @@ Route::controller(VelzonRoutesController::class)->group(function () {
     Route::get("/auth-signin", "auth_signin_cover");
     Route::get("/auth-signup", "auth_signup_cover");
     Route::get("profile", "profile");
+});
+// user KYC routes
+Route::controller(UserKYCController::class)->group(function () {
+    // Route::get("/profile", "UserKYC");
+    Route::post("/profile", "UserKYCStore");
+   
 });
 
 
