@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('user_kycs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique(); // Ensure unique relationship
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('aadhar_number');
             $table->string('pan_number');
             $table->string('account_number');
             $table->string('ifsc_code');
             $table->boolean('is_verified')->default(false);
+            $table->string('status')->default('pending');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

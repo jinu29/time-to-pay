@@ -43,7 +43,9 @@ Route::controller(VelzonRoutesController::class)->group(function () {
 // user KYC routes
 Route::controller(UserKYCController::class)->group(function () {
     // Route::get("/profile", "UserKYC");
-    Route::post("/profile", "UserKYCStore");
+    Route::post('/profile', [UserKYCController::class, 'UserKYCStore']);
+    Route::post('/toggle-kyc/{userId}', [UserKYCController::class, 'toggleKYCStatus']);
+    Route::post('/reject-kyc/{userId}', [UserKYCController::class, 'rejectKYC']);
    
 });
 
