@@ -914,4 +914,9 @@ class VelzonRoutesController extends Controller
     {
         return Inertia::render('ProfilePage/ProfilePage');
     }
+
+    // About
+    public function about() {
+        return Inertia::render('About/About');
+    }
 }

@@ -121,7 +121,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="fs-16 text-white" href="#process">
+                  <NavLink className="fs-16 text-white" href="about">
                     About
                   </NavLink>
                 </li>

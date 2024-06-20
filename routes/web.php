@@ -38,6 +38,7 @@ Route::controller(VelzonRoutesController::class)->group(function () {
     Route::get("/auth-signin", "auth_signin_cover");
     Route::get("/auth-signup", "auth_signup_cover");
     Route::get("profile", "profile");
+    Route::get("about", "about");
 });
 
 
