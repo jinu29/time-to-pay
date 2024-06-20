@@ -1,0 +1,33 @@
+.mission-container {
+    margin-top: 3rem;
+}
+
+.mission {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mission h4 {
+    font-size: 30px;
+    font-weight: 600;
+    color: black;
+}
+
+.mission-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.mission p {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 25px;
+}
+
+.mission-box {
+    display: flex;
+    align-items: center;
+}
