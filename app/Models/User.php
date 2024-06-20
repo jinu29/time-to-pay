@@ -20,11 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'role',
         'password',
-        'pan',
-        'aadhaar',
-        'phone'
+        'phone',
+        'role',
     ];
 
     /**
@@ -46,4 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function kyc()
+    {
+        return $this->hasOne(UserKyc::class);
+    }
 }

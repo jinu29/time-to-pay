@@ -3,30 +3,25 @@ import { Card, Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { Head, usePage, useForm } from '@inertiajs/react'; 
 import BreadCrumb from '../../Components/Common/BreadCrumb';
 import Layout from '../../Layouts';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const UserKYCProfile = () => {
+const UserKYCRegister = () => {
     const { users = [] } = usePage().props; 
 
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        phone: '',
-        password: '',
-        role: '',
+        userId: '',
         panCard: '', 
         aadhaarCard: '', 
+        bankAccountNo: '',
+        ifscCode: '',
     });
 
     useEffect(() => {
         setData({
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            password: data.password,
-            role: data.role,
+            userId: data.userId,
             panCard: data.panCard,
             aadhaarCard: data.aadhaarCard,
+            bankAccountNo: data.bankAccountNo,
+            ifscCode: data.ifscCode,
         });
     }, [data]);
 
@@ -41,18 +36,12 @@ const UserKYCProfile = () => {
         });
     };
 
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
     return (
         <React.Fragment>
-            <Head title="KYC | Time to Pay" />
+            <Head title="KYC Register | Time to Pay" />
             <div className="page-content">
                 <Container fluid>
-                    <BreadCrumb title="KYC" pageTitle="Dashboard" />
+                    <BreadCrumb title="User KYC Register" pageTitle="Dashboard" />
                     <Row className="gy-4">
                         <Col>
                             <Card>
@@ -61,80 +50,16 @@ const UserKYCProfile = () => {
                                         <Row className="gy-4">
                                             <Col xs={12} md={6}>
                                                 <Form.Group>
-                                                    <Form.Label htmlFor="name">Name</Form.Label>
+                                                    <Form.Label htmlFor="userId">User ID</Form.Label>
                                                     <Form.Control
                                                         type="text"
-                                                        id="name"
-                                                        value={data.name}
+                                                        id="userId"
+                                                        value={data.userId}
                                                         onChange={handleChange}
-                                                        placeholder="Name"
-                                                        isInvalid={!!errors.name}
+                                                        placeholder="User ID"
+                                                        isInvalid={!!errors.userId}
                                                     />
-                                                    {errors.name && <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>}
-                                                </Form.Group>
-                                            </Col>
-                                            <Col xs={12} md={6}>
-                                                <Form.Group>
-                                                    <Form.Label htmlFor="email">Email</Form.Label>
-                                                    <Form.Control
-                                                        type="email"
-                                                        id="email"
-                                                        value={data.email}
-                                                        onChange={handleChange}
-                                                        placeholder="Email"
-                                                        isInvalid={!!errors.email}
-                                                    />
-                                                    {errors.email && <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>}
-                                                </Form.Group>
-                                            </Col>
-                                            <Col xs={12} md={6}>
-                                                <Form.Group>
-                                                    <Form.Label htmlFor="phone">Phone Number</Form.Label>
-                                                    <Form.Control
-                                                        type="text"
-                                                        id="phone"
-                                                        value={data.phone}
-                                                        onChange={handleChange}
-                                                        placeholder="Phone Number"
-                                                        isInvalid={!!errors.phone}
-                                                    />
-                                                    {errors.phone && <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>}
-                                                </Form.Group>
-                                            </Col>
-                                            <Col xs={12} md={6}>
-                                                <Form.Group>
-                                                    <Form.Label htmlFor="password">Password</Form.Label>
-                                                    <div className="input-group">
-                                                        <Form.Control
-                                                            type={showPassword ? 'text' : 'password'}
-                                                            id="password"
-                                                            value={data.password}
-                                                            onChange={handleChange}
-                                                            placeholder="Password"
-                                                            isInvalid={!!errors.password}
-                                                        />
-                                                        <Button variant="outline-secondary" onClick={togglePasswordVisibility}>
-                                                            {showPassword ? <FaEyeSlash /> : <FaEye />}
-                                                        </Button>
-                                                    </div>
-                                                    {errors.password && <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>}
-                                                </Form.Group>
-                                            </Col>
-                                            <Col xs={12} md={6}>
-                                                <Form.Group>
-                                                    <Form.Label htmlFor="role">Role</Form.Label>
-                                                    <Form.Control
-                                                        as="select"
-                                                        id="role"
-                                                        value={data.role}
-                                                        onChange={handleChange}
-                                                        isInvalid={!!errors.role}
-                                                    >
-                                                        <option value="">Select Role</option>
-                                                        <option value="Distributor">Distributor</option>
-                                                        <option value="User">User</option>
-                                                    </Form.Control>
-                                                    {errors.role && <Form.Control.Feedback type="invalid">{errors.role}</Form.Control.Feedback>}
+                                                    {errors.userId && <Form.Control.Feedback type="invalid">{errors.userId}</Form.Control.Feedback>}
                                                 </Form.Group>
                                             </Col>
                                             <Col xs={12} md={6}>
@@ -165,6 +90,34 @@ const UserKYCProfile = () => {
                                                     {errors.aadhaarCard && <Form.Control.Feedback type="invalid">{errors.aadhaarCard}</Form.Control.Feedback>}
                                                 </Form.Group>
                                             </Col>
+                                            <Col xs={12} md={6}>
+                                                <Form.Group>
+                                                    <Form.Label htmlFor="bankAccountNo">Bank Account Number</Form.Label>
+                                                    <Form.Control
+                                                        type="text"
+                                                        id="bankAccountNo"
+                                                        value={data.bankAccountNo}
+                                                        onChange={handleChange}
+                                                        placeholder="Bank Account Number"
+                                                        isInvalid={!!errors.bankAccountNo}
+                                                    />
+                                                    {errors.bankAccountNo && <Form.Control.Feedback type="invalid">{errors.bankAccountNo}</Form.Control.Feedback>}
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={12} md={6}>
+                                                <Form.Group>
+                                                    <Form.Label htmlFor="ifscCode">IFSC Code</Form.Label>
+                                                    <Form.Control
+                                                        type="text"
+                                                        id="ifscCode"
+                                                        value={data.ifscCode}
+                                                        onChange={handleChange}
+                                                        placeholder="IFSC Code"
+                                                        isInvalid={!!errors.ifscCode}
+                                                    />
+                                                    {errors.ifscCode && <Form.Control.Feedback type="invalid">{errors.ifscCode}</Form.Control.Feedback>}
+                                                </Form.Group>
+                                            </Col>
                                             <Col xs={12}>
                                                 <Button className="btn btn-primary" type="submit" disabled={processing}>
                                                     {processing ? 'Updating...' : 'Update'}
@@ -182,5 +135,5 @@ const UserKYCProfile = () => {
     );
 };
 
-UserKYCProfile.layout = (page) => <Layout children={page} />;
-export default UserKYCProfile;
+UserKYCRegister.layout = (page) => <Layout children={page} />;
+export default UserKYCRegister;

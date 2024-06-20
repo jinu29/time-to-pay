@@ -150,7 +150,7 @@ const DistributorList = () => {
                                                         isInvalid={!!errors.role}
                                                     >
                                                         <option value="">Select Role</option>
-                                                        <option value="Distributor">Distributor</option>
+                                                        <option value="distributor">Distributor</option>
                                                     </Form.Control>
                                                     {errors.role && <Form.Control.Feedback type="invalid">{errors.role}</Form.Control.Feedback>}
                                                 </Form.Group>
