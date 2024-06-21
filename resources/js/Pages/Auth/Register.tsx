@@ -26,12 +26,35 @@ export default function Register() {
         };
     }, []);
 
-    const nextStage = () => setStage(stage + 1);
+    const nextStage = () => {
+        if (validateStage(stage)) {
+            setStage(stage + 1);
+        }
+    };
+
     const prevStage = () => setStage(stage - 1);
 
-    const submit = (e: any) => {
+    const validateStage = (currentStage) => {
+        switch (currentStage) {
+            case 1:
+                return data.name !== '' && data.email !== '' && data.phone !== '' && data.role !== '';
+            case 2:
+                return data.pincode !== '' && data.city !== '' && data.state !== '' && data.country !== '';
+            case 3:
+                return data.password !== '' && data.password_confirmation !== '';
+            default:
+                return true;
+        }
+    };
+
+    const submit = (e) => {
         e.preventDefault();
-        post(route('register'));
+        if (validateStage(stage)) {
+            post(route('register'));
+        } else {
+            // Handle validation error or prevent submission
+            console.error('Form validation failed.');
+        }
     };
 
     return (
@@ -62,7 +85,7 @@ export default function Register() {
                                                                 className={"mt-1 form-control" + (errors.name ? ' is-invalid' : '')}
                                                                 autoComplete="name"
                                                                 autoFocus
-                                                                onChange={(e: any) => setData('name', e.target.value)}
+                                                                onChange={(e) => setData('name', e.target.value)}
                                                                 required
                                                             />
                                                             <Form.Control.Feedback type="invalid" className='mt-2 d-block'>{errors.name}</Form.Control.Feedback>
@@ -79,7 +102,7 @@ export default function Register() {
                                                                 value={data.email}
                                                                 className={'mt-1 form-control' + (errors.email ? ' is-invalid' : '')}
                                                                 autoComplete="username"
-                                                                onChange={(e: any) => setData('email', e.target.value)}
+                                                                onChange={(e) => setData('email', e.target.value)}
                                                                 required
                                                             />
                                                             <Form.Control.Feedback type="invalid" className='mt-2 d-block'>{errors.email}</Form.Control.Feedback>
@@ -90,12 +113,15 @@ export default function Register() {
                                                             <span className="text-danger ms-1">*</span>
                                                             <Form.Control
                                                                 id="phone"
-                                                                type="text"
+                                                                type="tel"
                                                                 name="phone"
                                                                 placeholder="Enter phone number"
                                                                 value={data.phone}
                                                                 className={"mt-1 form-control" + (errors.phone ? ' is-invalid' : '')}
-                                                                onChange={(e: any) => setData('phone', e.target.value)}
+                                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                                    const phone = e.target.value.replace(/\D/g, '');
+                                                                    setData('phone', phone.slice(0, 10));
+                                                                }}
                                                                 required
                                                             />
                                                             <Form.Control.Feedback type="invalid" className='mt-2 d-block'>{errors.phone}</Form.Control.Feedback>
@@ -109,7 +135,7 @@ export default function Register() {
                                                                 name="role"
                                                                 value={data.role}
                                                                 className={"mt-1 form-control" + (errors.role ? ' is-invalid' : '')}
-                                                                onChange={(e: any) => setData('role', e.target.value)}
+                                                                onChange={(e) => setData('role', e.target.value)}
                                                                 required
                                                             >
                                                                 <option value="">Select Role</option>
@@ -133,12 +159,15 @@ export default function Register() {
                                                             <span className="text-danger ms-1">*</span>
                                                             <Form.Control
                                                                 id="pincode"
-                                                                type="text"
+                                                                type="number"
                                                                 name="pincode"
                                                                 placeholder="Enter pincode"
                                                                 value={data.pincode}
                                                                 className={"mt-1 form-control" + (errors.pincode ? ' is-invalid' : '')}
-                                                                onChange={(e: any) => setData('pincode', e.target.value)}
+                                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                                    const phone = e.target.value.replace(/\D/g, '');
+                                                                    setData('pincode', phone.slice(0, 6));
+                                                                }}
                                                                 required
                                                             />
                                                             <Form.Control.Feedback type="invalid" className='mt-2 d-block'>{errors.pincode}</Form.Control.Feedback>
@@ -154,7 +183,7 @@ export default function Register() {
                                                                 placeholder="Enter city"
                                                                 value={data.city}
                                                                 className={"mt-1 form-control" + (errors.city ? ' is-invalid' : '')}
-                                                                onChange={(e: any) => setData('city', e.target.value)}
+                                                                onChange={(e) => setData('city', e.target.value)}
                                                                 required
                                                             />
                                                             <Form.Control.Feedback type="invalid" className='mt-2 d-block'>{errors.city}</Form.Control.Feedback>
@@ -170,7 +199,7 @@ export default function Register() {
                                                                 placeholder="Enter state"
                                                                 value={data.state}
                                                                 className={"mt-1 form-control" + (errors.state ? ' is-invalid' : '')}
-                                                                onChange={(e: any) => setData('state', e.target.value)}
+                                                                onChange={(e) => setData('state', e.target.value)}
                                                                 required
                                                             />
                                                             <Form.Control.Feedback type="invalid" className='mt-2 d-block'>{errors.state}</Form.Control.Feedback>
@@ -186,7 +215,7 @@ export default function Register() {
                                                                 placeholder="Enter country"
                                                                 value={data.country}
                                                                 className={"mt-1 form-control" + (errors.country ? ' is-invalid' : '')}
-                                                                onChange={(e: any) => setData('country', e.target.value)}
+                                                                onChange={(e) => setData('country', e.target.value)}
                                                                 required
                                                             />
                                                             <Form.Control.Feedback type="invalid" className='mt-2 d-block'>{errors.country}</Form.Control.Feedback>
@@ -212,7 +241,7 @@ export default function Register() {
                                                                 value={data.password}
                                                                 className={"mt-1 form-control" + (errors.password ? ' is-invalid' : '')}
                                                                 autoComplete="new-password"
-                                                                onChange={(e: any) => setData('password', e.target.value)}
+                                                                onChange={(e) => setData('password', e.target.value)}
                                                                 required
                                                             />
                                                             <Form.Control.Feedback type="invalid" className='mt-2 d-block'>{errors.password}</Form.Control.Feedback>
@@ -229,7 +258,7 @@ export default function Register() {
                                                                 value={data.password_confirmation}
                                                                 className={"mt-1 form-control" + (errors.password_confirmation ? ' is-invalid' : '')}
                                                                 autoComplete="new-password"
-                                                                onChange={(e: any) => setData('password_confirmation', e.target.value)}
+                                                                onChange={(e) => setData('password_confirmation', e.target.value)}
                                                                 required
                                                             />
                                                             <Form.Control.Feedback type="invalid" className='mt-2 d-block'>{errors.password_confirmation}</Form.Control.Feedback>
