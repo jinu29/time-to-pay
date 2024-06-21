@@ -47,7 +47,6 @@ Route::controller(UserKYCController::class)->group(function () {
     Route::post('/profile', [UserKYCController::class, 'UserKYCStore']);
     Route::post('/toggle-kyc/{userId}', [UserKYCController::class, 'toggleKYCStatus']);
     Route::post('/reject-kyc/{userId}', [UserKYCController::class, 'rejectKYC']);
-   
 });
 
 
@@ -66,8 +65,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::controller(PagesController::class)->group(function () {
         Route::get("/eko", "EKOConf");
-
-
     });
 
 
@@ -252,8 +249,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get("/pages-maintenance", "pages_maintenance");
         Route::get("/pages-coming-soon", "pages_coming_soon");
     });
-
- 
 });
 
 
@@ -308,7 +303,15 @@ Route::prefix('setting')->group(function () {
 
 //distributer
 
-Route::middleware(['auth', 'distributor'])->group(function () {
-// Distributor routes here
+Route::controller(VelzonRoutesController::class)->group(function () {
+    Route::get("/distributor", "DashboardDistributor");
+});
 
+
+Route::controller(VelzonRoutesController::class)->group(function () {
+    Route::get("/master-distributor", "DashboardMasterDistributor");
+});
+
+Route::controller(VelzonRoutesController::class)->group(function () {
+    Route::get("/retailer", "DashboardRetailer");
 });

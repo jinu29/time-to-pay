@@ -19,12 +19,16 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('phone')->nullable();
-            $table->string('role')->default('User');
+            $table->integer('phone');
+            $table->string('role');
+            $table->integer('pincode');
+            $table->string('city');
+            $table->string('state');
+            $table->string('country');
             $table->rememberToken();
             $table->timestamps();
         });
-       
+
         // Create a default admin user
         User::create([
             'name' => 'Admin',

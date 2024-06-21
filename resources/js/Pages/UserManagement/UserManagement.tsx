@@ -14,8 +14,12 @@ const UserKYC = ({ users }) => {
         id: '',
         name: '',
         email: '',
-        pancard: '',
-        aadhaar: '',
+        phone: '',
+        pincode: '',
+        city: '',
+        state: '',
+        country: '',
+        role: ''
     });
 
     useEffect(() => {
@@ -91,8 +95,12 @@ const UserKYC = ({ users }) => {
             id: user.id,
             name: user.name,
             email: user.email,
-            pancard: user.pancard || '',
-            aadhaar: user.aadhaar || '',
+            phone: user.phone || '',
+            pincode: user.pincode || '',
+            city: user.city || '',
+            state: user.state || '',
+            country: user.country || '',
+            role: user.role || ''
         });
         setShowEditModal(true);
     };
@@ -132,10 +140,10 @@ const UserKYC = ({ users }) => {
 
     return (
         <React.Fragment>
-            <Head title='User KYC | Time To Pay' />
+            <Head title='User | Time To Pay' />
             <div className="page-content">
                 <Container fluid>
-                    <BreadCrumb title="User KYC" pageTitle="Tables" />
+                    <BreadCrumb title="User" pageTitle="Tables" />
                     <Row>
                         <Col xl={12}>
                             <Card>
@@ -149,9 +157,12 @@ const UserKYC = ({ users }) => {
                                                         <th scope="col">ID</th>
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Email</th>
-                                                        <th scope="col">Pancard</th>
-                                                        <th scope="col">Aadhaar</th>
-                                                        <th scope="col">Action</th>
+                                                        <th scope="col">Phone</th>
+                                                        <th scope="col">Pincode</th>
+                                                        <th scope="col">City</th>
+                                                        <th scope="col">State</th>
+                                                        <th scope="col">Country</th>
+                                                        <th scope="col">Role</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -160,16 +171,12 @@ const UserKYC = ({ users }) => {
                                                             <th scope="row"><Link href="#" className="fw-medium">{user.id}</Link></th>
                                                             <td>{user.name}</td>
                                                             <td>{user.email}</td>
-                                                            <td>{user.pancard}</td>
-                                                            <td>{user.aadhaar}</td>
-                                                            <td>
-                                                                <Link href="#" className="me-2" onClick={() => handleEdit(user)}>
-                                                                    Edit
-                                                                </Link>
-                                                                <Link href="#" onClick={() => handleDelete(user.id)}>
-                                                                    Delete
-                                                                </Link>
-                                                            </td>
+                                                            <td>{user.phone}</td>
+                                                            <td>{user.pincode}</td>
+                                                            <td>{user.city}</td>
+                                                            <td>{user.state}</td>
+                                                            <td>{user.country}</td>
+                                                            <td>{user.role}</td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
@@ -208,20 +215,56 @@ const UserKYC = ({ users }) => {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Pancard</Form.Label>
+                            <Form.Label>Phone</Form.Label>
                             <Form.Control
                                 type="text"
-                                name="pancard"
-                                value={formData.pancard}
+                                name="phone"
+                                value={formData.phone}
                                 onChange={handleInputChange}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Aadhaar</Form.Label>
+                            <Form.Label>Pincode</Form.Label>
                             <Form.Control
                                 type="text"
-                                name="aadhaar"
-                                value={formData.aadhaar}
+                                name="pincode"
+                                value={formData.pincode}
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>City</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="city"
+                                value={formData.city}
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>State</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="state"
+                                value={formData.state}
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Country</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="country"
+                                value={formData.country}
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Role</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="role"
+                                value={formData.role}
                                 onChange={handleInputChange}
                             />
                         </Form.Group>

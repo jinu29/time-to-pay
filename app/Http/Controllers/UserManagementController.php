@@ -25,12 +25,24 @@ class UserManagementController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
+            'phone' => ['required', 'string', 'max:50'],
+            'role' => ['required', 'string', 'max:50'],
+            'pincode' => ['required', 'string', 'max:10'],
+            'city' => ['required', 'string', 'max:255'],
+            'state' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'role' => $request->role,
+            'pincode' => $request->pincode,
+            'city' => $request->city,
+            'state' => $request->state,
+            'country' => $request->country,
         ]);
 
         return response()->json($user, 201);
@@ -131,7 +143,7 @@ class UserManagementController extends Controller
 
     public function UserKYCProfile()
     {
-        
+
         return Inertia::render('UserManagement/UserKYCProfile');
     }
     public function updateDistributorList(Request $request)
@@ -141,13 +153,13 @@ class UserManagementController extends Controller
             'email' => 'required|email',
             'phone' => 'required|string',
             'password' => 'required|string',
-            'role' => 'required|string|in:Distributor,User', 
+            'role' => 'required|string|in:Distributor,User',
             'panCard' => 'required|string',
             'aadhaarCard' => 'required|string',
         ]);
 
         return Inertia::render('UserManagement/UserKYCProfile', [
-            'users' => User::all(), 
+            'users' => User::all(),
         ]);
     }
 }

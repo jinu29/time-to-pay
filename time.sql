@@ -122,6 +122,22 @@ INSERT INTO `settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
 	(13, 'platform_commission', '33', '2024-06-07 22:43:50', '2024-06-07 22:43:50'),
 	(14, 'vendor_commission', '33', '2024-06-07 22:43:50', '2024-06-07 22:43:50');
 
+-- Dumping structure for table time_to_pay.user_kycs
+
+CREATE TABLE user_kycs (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT UNSIGNED NOT NULL UNIQUE,
+    aadhar_number VARCHAR(255) NOT NULL,
+    pan_number VARCHAR(255) NOT NULL,
+    account_number VARCHAR(255) NOT NULL,
+    ifsc_code VARCHAR(255) NOT NULL,
+    is_verified BOOLEAN DEFAULT FALSE,
+    status VARCHAR(255) DEFAULT 'pending',
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL,
+    CONSTRAINT user_kycs_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 -- Dumping structure for table time_to_pay.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -134,6 +150,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pincode` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -143,8 +163,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 	(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$3G9.O76ll.boJISG9JlDwOx8XVr1ylWHEAmL9Eoi4wBPOh7OgrnHi', NULL, '2024-06-03 00:31:55', '2024-06-03 05:34:39', 'admin', NULL),
 	(2, 'akhil', 't.p.akhiljinu@gmail.com', NULL, '$2y$12$2Sp5NYx0Ikvbn4t7/5DZAuRuGKnqZr5dErv1LX0NsgVISxLDXl33e', NULL, '2024-06-03 06:49:23', '2024-06-03 06:49:23', NULL, NULL),
 	(3, 'akhil', 'akhil@gmail.com', NULL, '$2y$12$shNhDSCzi6mkPx8PpSuPiOPiPAQuGdRY/7FsKTjkhnMiJigIEKB9C', NULL, '2024-06-08 04:56:32', '2024-06-08 04:56:32', 'user', NULL),
-	(4, 'keerthi', 'keerthi@gmail.com', NULL, '$2y$12$q1gcm.nc3A8FCz9tPrI93.pl4ZshU3KJx9UQgobdFPFdaF7QULi82', NULL, '2024-06-08 05:27:49', '2024-06-08 05:27:49', 'user', NULL);
-
+	(4, 'keerthi', 'keerthi@gmail.com', NULL, '$2y$12$AhlkZe7rlKLksC5iKY59MeUrOlqa2/LbeHmR3/RvvntsKTy4Byup6', NULL, '2024-06-08 05:27:49', '2024-06-08 05:27:49', 'retailer', NULL);
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

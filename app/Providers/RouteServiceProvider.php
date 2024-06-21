@@ -20,6 +20,8 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/';
     public const DASHBOARD = '/dashboard';
     public const  DISTRIBUTER = '/distributer';
+    public const  MASTERDISTRIBUTER = '/master-distributor';
+    public const  RETAILER = '/retailer';
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */

@@ -35,12 +35,15 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = Auth::user();
+        // dd($user->role);
         if ($user->role == 'admin') {
             return redirect()->intended(RouteServiceProvider::DASHBOARD);
-        } elseif ($user->role == 'user') {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        } elseif ($user->role == 'distributer') {
+        } elseif ($user->role == 'master-distributor') {
             return redirect()->intended(RouteServiceProvider::DISTRIBUTER);
+        } elseif ($user->role == 'distributor') {
+            return redirect()->intended(RouteServiceProvider::MASTERDISTRIBUTER);
+        } elseif ($user->role == 'retailer') {
+            return redirect()->intended(RouteServiceProvider::RETAILER);
         }
     }
 
