@@ -304,14 +304,14 @@ Route::prefix('setting')->group(function () {
 //distributer
 
 Route::controller(VelzonRoutesController::class)->group(function () {
-    Route::get("/distributor", "DashboardDistributor");
+    Route::get("/distributor", "dashboard_analytics");
 });
 
 
 Route::controller(VelzonRoutesController::class)->group(function () {
-    Route::get("/master-distributor", "DashboardMasterDistributor");
+    Route::get("/master-distributor", "dashboard_analytics");
 });
 
 Route::controller(VelzonRoutesController::class)->group(function () {
-    Route::get("/retailer", "DashboardRetailer");
+    Route::get("/retailer", "dashboard_analytics");
 });

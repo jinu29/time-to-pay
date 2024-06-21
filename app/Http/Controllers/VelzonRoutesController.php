@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\User;
 
 class VelzonRoutesController extends Controller
 {
@@ -22,29 +21,14 @@ class VelzonRoutesController extends Controller
         return Inertia::render('DashboardAnalytics/index');
     }
     //Role Based Dashboard
-    public function DashboardRetailer()
-    {
-        $users = User::all();
-        return Inertia::render('DashboardAnalytics/DashboardRetailer', [
-            'users' => $users,
-        ]);
-    }
 
     public function DashboardMasterDistributor()
     {
-        $users = User::all();
-        // dd($users);
-        return Inertia::render('DashboardAnalytics/DashboardMasterDistributor', [
-            'users' => $users,
-        ]);
+        return Inertia::render('DashboardAnalytics/DashboardMasterDistributor');
     }
     public function DashboardDistributor()
     {
-        $users = User::all();
-        // dd($users);
-        return Inertia::render('DashboardAnalytics/DashboardDistributor', [
-            'users' => $users,
-        ]);
+        return Inertia::render('DashboardAnalytics/DashboardDistributor');
     }
 
     public function dashboard_crm()

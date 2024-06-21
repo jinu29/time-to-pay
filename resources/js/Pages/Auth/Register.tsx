@@ -113,7 +113,7 @@ export default function Register() {
                                                                 required
                                                             >
                                                                 <option value="">Select Role</option>
-                                                                <option value="master-distributor">Master Distributor</option>
+                                                                <option value="distributor">Master Distributor</option>
                                                                 <option value="distributor">Distributor</option>
                                                                 <option value="retailer">Retailer</option>
                                                             </Form.Select>
