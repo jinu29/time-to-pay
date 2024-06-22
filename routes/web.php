@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\UserKYCController;
+use App\Http\Controllers\PaymentLinkGenerationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -290,6 +292,8 @@ Route::post('/business-settings', [SettingsController::class, 'BusinessSettingUp
 
 //
 Route::prefix('setting')->group(function () {
+
+    //Payment Conf
     Route::get('/payment_conf', [SettingsController::class, 'PaymentConfShow'])->name('settings.PaymentConfShow');
     Route::post('/payment_conf', [SettingsController::class, 'PaymentConfUpdate'])->name('settings.PaymentConfUpdate');
     Route::post('/payment_conf', [SettingsController::class, 'PaymentConfUpdate'])->name('settings.PaymentConfUpdate');
@@ -301,17 +305,25 @@ Route::prefix('setting')->group(function () {
 });
 
 
+//Payment Link  Generations
+Route::prefix('setting')->group(function () {
+    Route::get('/generate-Payment', [PaymentLinkGenerationController::class, 'generatePayment'])->name('settings.generatePayment');
+    Route::get('/generate-PaymentLink', [PaymentLinkGenerationController::class, 'generatePaymentLink'])->name('settings.generatePaymentLink');
+    Route::post('/generate-PaymentLink', [PaymentLinkGenerationController::class, 'generatePaymentLinkUpdate'])->name('settings.generatePaymentLinkUpdate');
+});
+
+
 //distributer
 
 Route::controller(VelzonRoutesController::class)->group(function () {
-    Route::get("/distributor", "dashboard_analytics");
+    Route::get("/distributor", "DashboardMasterDistributor");
 });
 
 
 Route::controller(VelzonRoutesController::class)->group(function () {
-    Route::get("/master-distributor", "dashboard_analytics");
+    Route::get("/master-distributor", "DashboardMasterDistributor");
 });
 
 Route::controller(VelzonRoutesController::class)->group(function () {
-    Route::get("/retailer", "dashboard_analytics");
+    Route::get("/retailer", "DashboardMasterDistributor");
 });
